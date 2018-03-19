@@ -22,3 +22,12 @@ detectron/datasets/data/*
 
 # Generated C files
 detectron/utils/cython_*.c
+
+exp/
+experiment/
+experiments/
+exp
+experiment
+experiments
+model/
+model

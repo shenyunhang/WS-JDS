@@ -72,6 +72,8 @@ def initialize_gpu_from_weights_file(model, weights_file, gpu_id=0):
     unscoped_param_names = OrderedDict()  # Print these out in model order
     for blob in model.params:
         unscoped_param_names[c2_utils.UnscopeName(str(blob))] = True
+    for blob in model.GetComputedParams():
+        unscoped_param_names[c2_utils.UnscopeName(str(blob))] = True
     with c2_utils.NamedCudaScope(gpu_id):
         for unscoped_param_name in unscoped_param_names.keys():
             if (unscoped_param_name.find(']_') >= 0 and
@@ -115,6 +117,8 @@ def initialize_gpu_from_weights_file(model, weights_file, gpu_id=0):
                     dst_name + '_momentum',
                     src_blobs[src_name + '_momentum'].astype(
                         np.float32, copy=False))
+    # if cfg.WSL.WSL_ON:
+        # return
 
     # We preserve blobs that are in the weights file but not used by the current
     # model. We load these into CPU memory under the '__preserve__/' namescope.
@@ -144,6 +148,13 @@ def save_model_to_weights_file(weights_file, model):
     blobs = {}
     # Save all parameters
     for param in model.params:
+        scoped_name = str(param)
+        unscoped_name = c2_utils.UnscopeName(scoped_name)
+        if unscoped_name not in blobs:
+            logger.debug(' {:s} -> {:s}'.format(scoped_name, unscoped_name))
+            blobs[unscoped_name] = workspace.FetchBlob(scoped_name)
+    # Save computed parameters
+    for param in model.GetComputedParams():
         scoped_name = str(param)
         unscoped_name = c2_utils.UnscopeName(scoped_name)
         if unscoped_name not in blobs:
@@ -193,6 +204,7 @@ def broadcast_parameters(model):
 
     _do_broadcast(model.params)
     _do_broadcast([b + '_momentum' for b in model.TrainableParams()])
+    _do_broadcast(model.GetComputedParams())
 
 
 def sum_multi_gpu_blob(blob_name):
@@ -212,6 +224,10 @@ def print_net(model, namescope='gpu_0'):
     """Print the model network."""
     logger.info('Printing model: {}'.format(model.net.Name()))
     op_list = model.net.Proto().op
+    try:
+        op_list.extend(model.mask_net.Proto().op)
+    except BaseException:
+        pass
     for op in op_list:
         input_name = op.input
         # For simplicity: only print the first output

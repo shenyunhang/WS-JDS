@@ -98,6 +98,8 @@ def im_list_to_blob(ims):
 
 
 def prep_im_for_blob(im, pixel_means, target_size, max_size):
+    # return prep_im_for_blob_unchanged(im, pixel_means, target_size, max_size)
+
     """Prepare an image for use as a network input blob. Specially:
       - Subtract per-channel pixel mean
       - Convert to float32
