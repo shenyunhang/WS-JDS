@@ -1,115 +1,178 @@
-# Detectron
+# Cyclic Guidance for Weakly Supervised Joint Detection and Segmentation
 
-Detectron is Facebook AI Research's software system that implements state-of-the-art object detection algorithms, including [Mask R-CNN](https://arxiv.org/abs/1703.06870). It is written in Python and powered by the [Caffe2](https://github.com/caffe2/caffe2) deep learning framework.
+By [Yunhang Shen](), [Rongrong Ji](http://mac.xmu.edu.cn/rrji-en.html), [Yan Wang](http://www.ee.columbia.edu/~yanwang/), [Yongjian Wu](), [Liujuan Cao]().
 
-At FAIR, Detectron has enabled numerous research projects, including: [Feature Pyramid Networks for Object Detection](https://arxiv.org/abs/1612.03144), [Mask R-CNN](https://arxiv.org/abs/1703.06870), [Detecting and Recognizing Human-Object Interactions](https://arxiv.org/abs/1704.07333), [Focal Loss for Dense Object Detection](https://arxiv.org/abs/1708.02002), [Non-local Neural Networks](https://arxiv.org/abs/1711.07971), [Learning to Segment Every Thing](https://arxiv.org/abs/1711.10370), [Data Distillation: Towards Omni-Supervised Learning](https://arxiv.org/abs/1712.04440), [DensePose: Dense Human Pose Estimation In The Wild](https://arxiv.org/abs/1802.00434), and [Group Normalization](https://arxiv.org/abs/1803.08494).
+CVPR 2019 Paper
 
-<div align="center">
-  <img src="demo/output/33823288584_1d21cf0a26_k_example_output.jpg" width="700px" />
-  <p>Example Mask R-CNN output.</p>
-</div>
+This project is based on [Detectron](https://github.com/facebookresearch/Detectron).
+
 
 ## Introduction
 
-The goal of Detectron is to provide a high-quality, high-performance
-codebase for object detection *research*. It is designed to be flexible in order
-to support rapid implementation and evaluation of novel research. Detectron
-includes implementations of the following object detection algorithms:
 
-- [Mask R-CNN](https://arxiv.org/abs/1703.06870) -- *Marr Prize at ICCV 2017*
-- [RetinaNet](https://arxiv.org/abs/1708.02002) -- *Best Student Paper Award at ICCV 2017*
-- [Faster R-CNN](https://arxiv.org/abs/1506.01497)
-- [RPN](https://arxiv.org/abs/1506.01497)
-- [Fast R-CNN](https://arxiv.org/abs/1504.08083)
-- [R-FCN](https://arxiv.org/abs/1605.06409)
-
-using the following backbone network architectures:
-
-- [ResNeXt{50,101,152}](https://arxiv.org/abs/1611.05431)
-- [ResNet{50,101,152}](https://arxiv.org/abs/1512.03385)
-- [Feature Pyramid Networks](https://arxiv.org/abs/1612.03144) (with ResNet/ResNeXt)
-- [VGG16](https://arxiv.org/abs/1409.1556)
-
-Additional backbone architectures may be easily implemented. For more details about these models, please see [References](#references) below.
-
-## Update
-
-- 4/2018: Support Group Normalization - see [`GN/README.md`](./projects/GN/README.md)
 
 ## License
 
-Detectron is released under the [Apache 2.0 license](https://github.com/facebookresearch/detectron/blob/master/LICENSE). See the [NOTICE](https://github.com/facebookresearch/detectron/blob/master/NOTICE) file for additional details.
+WS-JDS is released under the [Apache 2.0 license](https://github.com/shenyunhang/WS-JDS/blob/ws-jds/LICENSE). See the [NOTICE](https://github.com/shenyunhang/WS-JDS/blob/ws-jds/NOTICE) file for additional details.
 
-## Citing Detectron
 
-If you use Detectron in your research or wish to refer to the baseline results published in the [Model Zoo](MODEL_ZOO.md), please use the following BibTeX entry.
+## Citing WS-JDS
+
+If you find WS-JDS useful in your research, please consider citing:
 
 ```
-@misc{Detectron2018,
-  author =       {Ross Girshick and Ilija Radosavovic and Georgia Gkioxari and
-                  Piotr Doll\'{a}r and Kaiming He},
-  title =        {Detectron},
-  howpublished = {\url{https://github.com/facebookresearch/detectron}},
-  year =         {2018}
-}
+@inproceedings{Shen_2019_CVPR,
+    author = {Yunhang Shen and Rongrong Ji and Yan Wang and Yongjian Wu and Liujuan Cao},
+    title = {{Cyclic Guidance for Weakly Supervised Joint Detection and Segmentation}},
+    booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+    year = {2019},
+}   
 ```
 
-## Model Zoo and Baselines
-
-We provide a large set of baseline results and trained models available for download in the [Detectron Model Zoo](MODEL_ZOO.md).
 
 ## Installation
 
-Please find installation instructions for Caffe2 and Detectron in [`INSTALL.md`](INSTALL.md).
+**Requirements:**
 
-## Quick Start: Using Detectron
+- NVIDIA GPU, Linux, Python2
+- Caffe2 in pytorch v1.0.1, various standard Python packages, and the COCO API; Instructions for installing these dependencies are found below
 
-After installation, please see [`GETTING_STARTED.md`](GETTING_STARTED.md) for brief tutorials covering inference and training with Detectron.
+### Caffe2
 
-## Getting Help
+Clone the pytorch repository:
 
-To start, please check the [troubleshooting](INSTALL.md#troubleshooting) section of our installation instructions as well as our [FAQ](FAQ.md). If you couldn't find help there, try searching our GitHub issues. We intend the issues page to be a forum in which the community collectively troubleshoots problems.
+```
+# pytorch=/path/to/clone/pytorch
+git clone https://github.com/pytorch/pytorch.git $pytorch
+cd $pytorch
+git checkout v1.0.1
+git submodule update --init --recursive
+```
 
-If bugs are found, **we appreciate pull requests** (including adding Q&A's to `FAQ.md` and improving our installation instructions and troubleshooting documents). Please see [CONTRIBUTING.md](CONTRIBUTING.md) for more information about contributing to Detectron.
+Install Python dependencies:
 
-## References
+```
+pip install -r $pytorch/requirements.txt
+```
 
-- [Data Distillation: Towards Omni-Supervised Learning](https://arxiv.org/abs/1712.04440).
-  Ilija Radosavovic, Piotr Dollár, Ross Girshick, Georgia Gkioxari, and Kaiming He.
-  Tech report, arXiv, Dec. 2017.
-- [Learning to Segment Every Thing](https://arxiv.org/abs/1711.10370).
-  Ronghang Hu, Piotr Dollár, Kaiming He, Trevor Darrell, and Ross Girshick.
-  Tech report, arXiv, Nov. 2017.
-- [Non-Local Neural Networks](https://arxiv.org/abs/1711.07971).
-  Xiaolong Wang, Ross Girshick, Abhinav Gupta, and Kaiming He.
-  Tech report, arXiv, Nov. 2017.
-- [Mask R-CNN](https://arxiv.org/abs/1703.06870).
-  Kaiming He, Georgia Gkioxari, Piotr Dollár, and Ross Girshick.
-  IEEE International Conference on Computer Vision (ICCV), 2017.
-- [Focal Loss for Dense Object Detection](https://arxiv.org/abs/1708.02002).
-  Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, and Piotr Dollár.
-  IEEE International Conference on Computer Vision (ICCV), 2017.
-- [Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour](https://arxiv.org/abs/1706.02677).
-  Priya Goyal, Piotr Dollár, Ross Girshick, Pieter Noordhuis, Lukasz Wesolowski, Aapo Kyrola, Andrew Tulloch, Yangqing Jia, and Kaiming He.
-  Tech report, arXiv, June 2017.
-- [Detecting and Recognizing Human-Object Interactions](https://arxiv.org/abs/1704.07333).
-  Georgia Gkioxari, Ross Girshick, Piotr Dollár, and Kaiming He.
-  Tech report, arXiv, Apr. 2017.
-- [Feature Pyramid Networks for Object Detection](https://arxiv.org/abs/1612.03144).
-  Tsung-Yi Lin, Piotr Dollár, Ross Girshick, Kaiming He, Bharath Hariharan, and Serge Belongie.
-  IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.
-- [Aggregated Residual Transformations for Deep Neural Networks](https://arxiv.org/abs/1611.05431).
-  Saining Xie, Ross Girshick, Piotr Dollár, Zhuowen Tu, and Kaiming He.
-  IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2017.
-- [R-FCN: Object Detection via Region-based Fully Convolutional Networks](http://arxiv.org/abs/1605.06409).
-  Jifeng Dai, Yi Li, Kaiming He, and Jian Sun.
-  Conference on Neural Information Processing Systems (NIPS), 2016.
-- [Deep Residual Learning for Image Recognition](http://arxiv.org/abs/1512.03385).
-  Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun.
-  IEEE Conference on Computer Vision and Pattern Recognition (CVPR), 2016.
-- [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](http://arxiv.org/abs/1506.01497)
-  Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun.
-  Conference on Neural Information Processing Systems (NIPS), 2015.
-- [Fast R-CNN](http://arxiv.org/abs/1504.08083).
-  Ross Girshick.
-  IEEE International Conference on Computer Vision (ICCV), 2015.
+Build caffe2:
+
+```
+cd $pytorch
+sudo USE_OPENCV=On USE_LMDB=On BUILD_BINARY=On python3 setup.py install
+```
+
+
+### Other Dependencies
+
+Install the [COCO API](https://github.com/cocodataset/cocoapi):
+
+```
+# COCOAPI=/path/to/clone/cocoapi
+git clone https://github.com/cocodataset/cocoapi.git $COCOAPI
+cd $COCOAPI/PythonAPI
+# Install into global site-packages
+make install
+# Alternatively, if you do not have permissions or prefer
+# not to install the COCO API into global site-packages
+python setup.py install --user
+```
+
+Note that instructions like `# COCOAPI=/path/to/install/cocoapi` indicate that you should pick a path where you'd like to have the software cloned and then set an environment variable (`COCOAPI` in this case) accordingly.
+
+Install the [pycococreator](https://github.com/waspinator/pycococreator):
+
+```
+pip install git+git://github.com/waspinator/pycococreator.git@0.2.0
+```
+
+
+### WS-JDS
+
+Clone the WS-JDS repository:
+
+```
+# WS-JDS=/path/to/clone/WS-JDS
+git clone https://github.com/shenyunhang/WS-JDS.git $WS-JDS
+cd $WS-JDS
+```
+
+Install Python dependencies:
+
+```
+pip install -r requirements.txt
+```
+
+Set up Python modules:
+
+```
+make
+```
+
+Build the custom operators library:
+
+```
+mkdir -p build && cd build
+cmake .. -DCMAKE_CXX_FLAGS="-isystem $pytorch/third_party/eigen -isystem $/pytorch/third_party/cub"
+make
+```
+
+
+### Dataset Preparation
+Please follow [this](https://github.com/shenyunhang/WS-JDS/blob/ws-jds/detectron/datasets/data/README.md#creating-symlinks-for-pascal-voc) to creating symlinks for PASCAL VOC.
+
+Download MCG proposal from [here](https://www2.eecs.berkeley.edu/Research/Projects/CS/vision/grouping/mcg/) to detectron/datasets/data, and transform it to pickle serialization format:
+
+```
+cd detectron/datasets/data
+tar xvzf MCG-Pascal-Main_trainvaltest_2007-boxes.tgz
+cd ../../../
+python tools/convert_mcg.py voc_2007_train detectron/datasets/data/MCG-Pascal-Main_trainvaltest_2007-boxes detectron/datasets/data/mcg_voc_2007_train.pkl
+python tools/convert_mcg.py voc_2007_val detectron/datasets/data/MCG-Pascal-Main_trainvaltest_2007-boxes detectron/datasets/data/mcg_voc_2007_val.pkl
+python tools/convert_mcg.py voc_2007_test detectron/datasets/data/MCG-Pascal-Main_trainvaltest_2007-boxes detectron/datasets/data/mcg_voc_2007_test.pkl
+```
+
+
+### Model Preparation
+
+Download VGG16 model (VGG_ILSVRC_16_layers.caffemodel and VGG_ILSVRC_16_layers_deploy.prototxtt) and transform it to pickle serialization format:
+```
+cd $WS-JDS
+mkdir -p model/
+cd model
+wget http://www.robots.ox.ac.uk/~vgg/software/very_deep/caffe/VGG_ILSVRC_16_layers.caffemodel
+wget https://gist.githubusercontent.com/ksimonyan/211839e770f7b538e2d8/raw/ded9363bd93ec0c770134f4e387d8aaaaa2407ce/VGG_ILSVRC_16_layers_deploy.prototxt
+cd ../
+./scripts/convert_vgg16.sh
+```
+
+Download DeepLabv2_VGG16 and transform it to pickle serialization format:
+```
+cd $WS-JDS
+cd model
+wget http://liangchiehchen.com/projects/released/deeplab_aspp_vgg16/prototxt_and_model.zip
+unzip prototxt_and_model.zip
+cd ..
+python tools/pickle_caffe_blobs.py --prototxt model/train.prototxt --caffemodel model/init.caffemodel --output model/init.pkl 
+python tools/combine_deeplab_and_original_vgg16.py model/VGG_ILSVRC_16_layers_v1.pkl model/init.pkl model/vgg16_init.pkl
+```
+
+Noted that this requires to instal caffe1 separately, as caffe1 specific proto is removed in pytorch v1.0.1. 
+See [this](https://github.com/pytorch/pytorch/commit/40109b16d0df8248bc01ad08c7ab615310c52d67).
+
+You can download vgg16_init.pkl from this [link](https://1drv.ms/u/s!AodeRhn8mpxoh01lSlZsiNJC-gNP?e=Lgsw5f).
+
+You may also need to modify the below config files to point TRAINING.WEIGHTS to vgg16_init.pkl.
+
+
+## Quick Start: Using WS-JDS
+```
+./scripts/train_wsl.sh --cfg configs/voc_2007/ws-jds_VGG16-C5D_1x.yaml OUTPUT_DIR experiments/ws-jds_vgg16_voc2007_`date +'%Y-%m-%d_%H-%M-%S'`
+```
+
+### Result
+The final model and log can be downloaded from [here](https://1drv.ms/u/s!AodeRhn8mpxoh1bcp7TnmBu31Gow?e=uhuUFT).
+
+Noted that the results reported in the paper are based on Caffe2 in pytorch v0.4.1, while this repository is based on v1.0.1.
+
+And upgrade it to v1.2.0 may reduce the performance by ~2% mAP on PASCAL VOC, which is weird.
