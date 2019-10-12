@@ -95,6 +95,7 @@ Clone the WS-JDS repository:
 # WS-JDS=/path/to/clone/WS-JDS
 git clone https://github.com/shenyunhang/WS-JDS.git $WS-JDS
 cd $WS-JDS
+git submodule update --init --recursive
 ```
 
 Install Python dependencies:
@@ -109,7 +110,7 @@ Set up Python modules:
 make
 ```
 
-Build the custom operators library:
+Build the custom C++ operators library:
 
 ```
 mkdir -p build && cd build
