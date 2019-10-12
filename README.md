@@ -59,7 +59,7 @@ Build caffe2:
 
 ```
 cd $pytorch
-sudo USE_OPENCV=On USE_LMDB=On BUILD_BINARY=On python3 setup.py install
+sudo USE_OPENCV=On USE_LMDB=On BUILD_BINARY=On python2 setup.py install
 ```
 
 
