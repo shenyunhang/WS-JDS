@@ -161,7 +161,7 @@ python tools/combine_deeplab_and_original_vgg16.py model/VGG_ILSVRC_16_layers_v1
 Noted that this requires to instal caffe1 separately, as caffe1 specific proto is removed in pytorch v1.0.1. 
 See [this](https://github.com/pytorch/pytorch/commit/40109b16d0df8248bc01ad08c7ab615310c52d67).
 
-You can download vgg16_init.pkl from this [link](https://1drv.ms/u/s!AodeRhn8mpxoh01lSlZsiNJC-gNP?e=Lgsw5f).
+You can download vgg16_init.pkl from this [link](https://1drv.ms/u/s!Am1oWgo9554dgRJ84jU-7V4LTG9m?e=PNJJ4U).
 
 You may also need to modify the below config files to point TRAINING.WEIGHTS to vgg16_init.pkl.
 
@@ -172,7 +172,7 @@ You may also need to modify the below config files to point TRAINING.WEIGHTS to 
 ```
 
 ### Result
-The final model and log can be downloaded from [here](https://1drv.ms/u/s!AodeRhn8mpxoh1bcp7TnmBu31Gow?e=uhuUFT).
+The final model and log can be downloaded from [here](https://1drv.ms/u/s!Am1oWgo9554dgQFQiFRuCFo0jGgc?e=9m6VX3).
 
 Noted that the results reported in the paper are based on Caffe2 in pytorch v0.4.1, while this repository is based on v1.0.1.
 
