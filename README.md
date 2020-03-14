@@ -2,7 +2,7 @@
 
 By [Yunhang Shen](), [Rongrong Ji](http://mac.xmu.edu.cn/rrji-en.html), [Yan Wang](http://www.ee.columbia.edu/~yanwang/), [Yongjian Wu](), [Liujuan Cao]().
 
-CVPR 2019 Paper
+CVPR 2019 Paper.
 
 This project is based on [Detectron](https://github.com/facebookresearch/Detectron).
 
@@ -21,11 +21,11 @@ WS-JDS is released under the [Apache 2.0 license](https://github.com/shenyunhang
 If you find WS-JDS useful in your research, please consider citing:
 
 ```
-@inproceedings{Shen_2019_CVPR,
-    author = {Yunhang Shen and Rongrong Ji and Yan Wang and Yongjian Wu and Liujuan Cao},
-    title = {{Cyclic Guidance for Weakly Supervised Joint Detection and Segmentation}},
-    booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
-    year = {2019},
+@inproceedings{WS-JDS_2019_CVPR,
+	author = {Shen, Yunhang and Ji, Rongrong and Wang, Yan and Wu, Yongjian and Cao, Liujuan},
+	title = {Cyclic Guidance for Weakly Supervised Joint Detection and Segmentation},
+	booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+	year = {2019},
 }   
 ```
 
@@ -161,7 +161,7 @@ python tools/combine_deeplab_and_original_vgg16.py model/VGG_ILSVRC_16_layers_v1
 Noted that this requires to instal caffe1 separately, as caffe1 specific proto is removed in pytorch v1.0.1. 
 See [this](https://github.com/pytorch/pytorch/commit/40109b16d0df8248bc01ad08c7ab615310c52d67).
 
-You can download vgg16_init.pkl from this [link](https://1drv.ms/u/s!Am1oWgo9554dgRJ84jU-7V4LTG9m?e=PNJJ4U).
+You can download vgg16_init.pkl from this [link](https://1drv.ms/u/s!Am1oWgo9554dgQBuZaSosIyeaM5U?e=Ezn0L0).
 
 You may also need to modify the below config files to point TRAINING.WEIGHTS to vgg16_init.pkl.
 
@@ -172,7 +172,7 @@ You may also need to modify the below config files to point TRAINING.WEIGHTS to 
 ```
 
 ### Result
-The final model and log can be downloaded from [here](https://1drv.ms/u/s!Am1oWgo9554dgQFQiFRuCFo0jGgc?e=9m6VX3).
+The final model and log can be downloaded from [here](https://1drv.ms/u/s!Am1oWgo9554dgQBuZaSosIyeaM5U?e=Ezn0L0).
 
 Noted that the results reported in the paper are based on Caffe2 in pytorch v0.4.1, while this repository is based on v1.0.1.
 
